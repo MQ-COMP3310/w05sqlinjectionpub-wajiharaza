@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 public class SQLiteConnectionManager {
     //Start code logging exercise
     static {
@@ -64,8 +63,8 @@ public class SQLiteConnectionManager {
         try (Connection conn = DriverManager.getConnection(databaseURL)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
+                //System.out.println("The driver name is " + meta.getDriverName());
+                //System.out.println("A new database has been created.");
 
             }
         } catch (SQLException e) {
@@ -88,7 +87,8 @@ public class SQLiteConnectionManager {
                     return true;
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                logger.log(Level.SEVERE, "exception!: {0}", e);
+                //System.out.println(e.getMessage());
                 return false;
             }
         }
@@ -113,7 +113,8 @@ public class SQLiteConnectionManager {
                 return true;
 
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                logger.log(Level.SEVERE, "exception!: {0}", e);
+                //System.out.println(e.getMessage());
                 return false;
             }
         }
@@ -133,7 +134,8 @@ public class SQLiteConnectionManager {
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, "exception!: {0}", e);
+            //System.out.println(e.getMessage());
         }
 
     }
@@ -159,9 +161,11 @@ public class SQLiteConnectionManager {
             return false;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "exception!: {0}", e);
+            //System.out.println(e.getMessage());
             return false;
         }
 
     }
+
 }
